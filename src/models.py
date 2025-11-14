@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Optional, List
+
 from pydantic import BaseModel, Field
 
 
@@ -51,5 +53,5 @@ class DashboardMockData(BaseModel):
     """
     games: List[GameSummary] = Field(default_factory=list)
     chartData: List[ChartPoint] = Field(default_factory=list)
-    stats: GlobalStats = Field(default_factory=GlobalStats)
+    stats: GlobalStats
 
