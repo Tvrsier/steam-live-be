@@ -1,8 +1,8 @@
-from fastapi import FastAPI
+from src.config import get_settings
 
-app = FastAPI()
+def main() -> None:
+    settings = get_settings()
+    print(settings.environment, settings.storage_level)
 
-
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
+if __name__ == "__main__":
+    main()
