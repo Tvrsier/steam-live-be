@@ -54,4 +54,3 @@ class DashboardMockData(BaseModel):
     games: List[GameSummary] = Field(default_factory=list)
     chartData: List[ChartPoint] = Field(default_factory=list)
     stats: GlobalStats
-

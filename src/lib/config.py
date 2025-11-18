@@ -27,6 +27,12 @@ class Settings(BaseSettings):
     # Steam
     steam_api_key: Optional[str] = None
 
+    # Base URL Steam Web API (hardcodabile ma sovrascrivibile da env)
+    steam_api_base_url: str = "https://api.steampowered.com"
+
+    # Versione di default per gli endpoint (es. v1)
+    steam_api_default_version: int = 1
+
     # App Steam specifiche da tracciare (opzionale)
     tracked_app_ids: List[int] = Field(default_factory=list)
 
@@ -34,6 +40,7 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = False
+        extra = "allow"
 
 
 _settings: Optional[Settings] = None
