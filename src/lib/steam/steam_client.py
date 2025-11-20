@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Any
+from typing import Dict, Any, Literal
 
 import httpx
 from pydantic import BaseModel, ConfigDict
@@ -12,7 +12,7 @@ class SteamRequestParams(BaseModel):
     model_config = ConfigDict(extra="allow")
 
     access_token: str | None = None
-    call_method: str | None = "get"
+    call_method: Literal["get", "post"] = "get"
 
     def as_query(self) -> dict[str, Any]:
         data = self.model_dump(exclude={"call_method"}, exclude_none=True)
@@ -41,6 +41,7 @@ def call_api(url: str, params: SteamRequestParams | None = None) -> Dict[str, An
         elif params.call_method == "post":
             resp = httpx.post(url=url, params=query, timeout=10.0)
         else:
+            # This branch is unreachable due to Literal type validation, but kept for runtime safety
             raise NotImplementedError(f"HTTP method {params.call_method} is not implemented.")
         resp.raise_for_status()
         data = resp.json()
