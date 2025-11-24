@@ -33,6 +33,13 @@ class Settings(BaseSettings):
     # Versione di default per gli endpoint (es. v1)
     steam_api_default_version: int = 1
 
+    rate_limit: int = 100_000
+    burst_limit: int = 200
+    burst_window_seconds: int = 300
+
+    rate_warn_threshold: float = 0.8
+    burst_warn_threshold: float = 0.8
+
     # App Steam specifiche da tracciare (opzionale)
     tracked_app_ids: List[int] = Field(default_factory=list)
 
